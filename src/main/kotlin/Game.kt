@@ -1,9 +1,8 @@
-import java.lang.NumberFormatException
 import kotlin.system.exitProcess
 
 class Game {
     private var currentPlayer = Piece.X
-    private val board = arrayOfNulls<Piece>(9)
+    private var board = arrayOfNulls<Piece>(9)
 
     init{
         introScreen()
@@ -42,7 +41,7 @@ class Game {
         println(" 4 | 5 | 6 ")
         println("---+---+---")
         println(" 7 | 8 | 9 ")
-        println("Player 1 is X and Player 2 is 0.")
+        println("Player 1 is X and Player 2 is O.")
         print("\nPlayer 1's turn, please enter a cell position from 1 to 9: ")
         try{
             gameLogic(readlnOrNull()?.toInt())
@@ -68,8 +67,6 @@ class Game {
                 printBoard()
                 checkWinner()
                 changePlayer()
-
-
             }
             else{
                 print("There's already a piece here! Try another position: ")
@@ -101,11 +98,67 @@ class Game {
     }
 
     private fun checkWinner(){
+        // Horizontal 3 in a row
         if(board[0] == board[1] && board[0] == board[2] && board[0] != null){
             val winner = if (currentPlayer == Piece.X) "Player 1" else "Player 2"
-            println("$winner is the winner!")
+            println("\n$winner is the winner!\n")
+            finishGameMenu()
+        }
+        if(board[3] == board[4] && board[3] == board[5] && board[3] != null){
+            val winner = if (currentPlayer == Piece.X) "Player 1" else "Player 2"
+            println("\n$winner is the winner!\n")
+            finishGameMenu()
+        }
+        if(board[6] == board[7] && board[6] == board[8] && board[6] != null){
+            val winner = if (currentPlayer == Piece.X) "Player 1" else "Player 2"
+            println("\n$winner is the winner!\n")
+            finishGameMenu()
+        }
+        // Vertical 3 in a row
+        if(board[0] == board[3] && board[0] == board[6] && board[0] != null){
+            val winner = if (currentPlayer == Piece.X) "Player 1" else "Player 2"
+            println("\n$winner is the winner!\n")
+            finishGameMenu()
+        }
+        if(board[1] == board[4] && board[1] == board[7] && board[1] != null){
+            val winner = if (currentPlayer == Piece.X) "Player 1" else "Player 2"
+            println("\n$winner is the winner!\n")
+            finishGameMenu()
+        }
+        if(board[2] == board[5] && board[2] == board[8] && board[2] != null){
+            val winner = if (currentPlayer == Piece.X) "Player 1" else "Player 2"
+            println("\n$winner is the winner!\n")
+            finishGameMenu()
+        }
+        // Diagonals 3 in a row
+        if(board[0] == board[4] && board[0] == board[8] && board[0] != null){
+            val winner = if (currentPlayer == Piece.X) "Player 1" else "Player 2"
+            println("\n$winner is the winner!\n")
+            finishGameMenu()
+        }
+        if(board[2] == board[4] && board[2] == board[6] && board[2] != null){
+            val winner = if (currentPlayer == Piece.X) "Player 1" else "Player 2"
+            println("\n$winner is the winner!\n")
+            finishGameMenu()
+        }
+        if(!board.contains(null)){
+            println("\nThe game is a draw!\n")
+            finishGameMenu()
         }
     }
 
-
+    private fun finishGameMenu(){
+        println("Enter 1 to start a new game.")
+        println("Enter 2 to quit.")
+        print("Enter your choice: ")
+        try{
+            board = arrayOfNulls(9)
+            currentPlayer = Piece.X
+            handleInput(readlnOrNull()?.toInt())
+        }
+        catch(e: Exception){
+            println("\nPlease enter either 1 or 2!")
+            finishGameMenu()
+        }
+    }
 }
