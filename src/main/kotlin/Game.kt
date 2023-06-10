@@ -35,7 +35,7 @@ class Game {
     }
 
     private fun startGame(){
-        println("\nPlayers will alternate turns placing your pieces in one of the 9 cells.")
+        println("Players will alternate turns placing your piece in one of the 9 cells.")
         println("The cell position is listed as such.")
         println(" 1 | 2 | 3 ")
         println("---+---+---")
@@ -44,7 +44,13 @@ class Game {
         println(" 7 | 8 | 9 ")
         println("Player 1 is X and Player 2 is 0.")
         print("\nPlayer 1's turn, please enter a cell position from 1 to 9: ")
-        gameLogic(readlnOrNull()?.toInt())
+        try{
+            gameLogic(readlnOrNull()?.toInt())
+
+        } catch(e: Exception){
+            println("\nPlease enter a cell position from 1 to 9!")
+            startGame()
+        }
     }
 
     private fun exitGame(){
